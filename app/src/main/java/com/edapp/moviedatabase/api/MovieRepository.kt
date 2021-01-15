@@ -2,14 +2,13 @@ package com.edapp.moviedatabase.api
 
 import com.edapp.moviedatabase.models.Movie
 
-class MovieRepository(private val apiInterface: MovieApi) : Repository() {
+class MovieRepository(private val movieApi: MovieApi) : Repository() {
 
-    suspend fun getPopularMoviesList() : List<Movie>? {
+    suspend fun getPopularMoviesList(page: Int) : List<Movie>? {
 
         return makeApiCall(
-            call = { apiInterface.fetchPopularMovies()},
+            call = { movieApi.fetchPopularMovies(page)},
             error = "Failed to fetch movie list"
         )?.results
     }
-
 }

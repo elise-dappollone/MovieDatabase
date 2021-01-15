@@ -20,6 +20,6 @@ open class Repository {
         return if (response.isSuccessful)
             Result.Success(response.body()!!)
         else
-            Result.Error(IOException("failed to fetch movie list because of: $error"))
+            Result.Error(IOException("failed to fetch item because of: $error"))
     }
 }

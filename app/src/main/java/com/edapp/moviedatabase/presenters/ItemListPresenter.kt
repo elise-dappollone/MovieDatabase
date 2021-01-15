@@ -1,6 +1,5 @@
 package com.edapp.moviedatabase.presenters
 
-import android.util.Log
 import com.edapp.moviedatabase.api.MovieApiService
 import com.edapp.moviedatabase.api.MovieRepository
 import com.edapp.moviedatabase.models.Movie
@@ -13,20 +12,30 @@ class ItemListPresenter {
     private val scope = CoroutineScope(coroutineContext)
     private val repository = MovieRepository(MovieApiService.movieApi)
 
+    private var movieList: Array<Movie> = emptyArray()
+    private var pageNumber = 1
 
-    fun onCreate(): List<Movie> {
-        var movieList: List<Movie> = emptyList()
+    fun onCreate(): Array<Movie> {
         val response = scope.async {
-            getPopularMoviesList()
+            getPopularMoviesList(pageNumber)
         }
         runBlocking {
-            movieList = response.await()?.toList()
-            Log.i("ItemListPresenter", response.toString())
+            movieList = response.await()?.toTypedArray()
         }
         return movieList
     }
 
-    suspend fun getPopularMoviesList(): List<Movie> {
-        return repository.getPopularMoviesList() ?: emptyList()
+    fun loadMoreClicked(): Array<Movie> {
+        val response = scope.async {
+            getPopularMoviesList(pageNumber++)
+        }
+        runBlocking {
+            movieList = response.await()?.toTypedArray()
+        }
+        return movieList
+    }
+
+    suspend fun getPopularMoviesList(page: Int): List<Movie> {
+        return repository.getPopularMoviesList(page) ?: emptyList()
     }
 }
