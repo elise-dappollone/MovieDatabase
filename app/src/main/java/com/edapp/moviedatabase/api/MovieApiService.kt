@@ -18,7 +18,7 @@ object MovieApiService {
 
     private val okHttpClient = OkHttpClient().newBuilder().addInterceptor(interceptor).build()
 
-    private val retrofit: Retrofit
+    val retrofit: Retrofit
         get() = Retrofit.Builder().client(okHttpClient)
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())

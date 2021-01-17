@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.edapp.moviedatabase.ItemDetailFragment.Companion.ITEM_DETAIL
 import com.edapp.moviedatabase.dummy.DummyContent
 import com.edapp.moviedatabase.models.Movie
 import com.squareup.picasso.Picasso
@@ -21,11 +22,11 @@ class SimpleItemRecyclerViewAdapter(private val parentActivity: ItemListActivity
 
     init {
         onClickListener = View.OnClickListener { v ->
-            val item = v.tag as DummyContent.DummyItem
+            val item = v.tag as Movie
             if (twoPane) {
                 val fragment = ItemDetailFragment().apply {
                     arguments = Bundle().apply {
-                        putString(ItemDetailFragment.ARG_ITEM_ID, item.id)
+                        putSerializable(ITEM_DETAIL, item)
                     }
                 }
                 parentActivity.supportFragmentManager
@@ -34,7 +35,7 @@ class SimpleItemRecyclerViewAdapter(private val parentActivity: ItemListActivity
                     .commit()
             } else {
                 val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
-                    putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
+                    putExtra(ITEM_DETAIL, item)
                 }
                 v.context.startActivity(intent)
             }
@@ -49,7 +50,7 @@ class SimpleItemRecyclerViewAdapter(private val parentActivity: ItemListActivity
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        Picasso.with(holder.posterImage.context).load(ItemListActivity.BASE_URL + ItemListActivity.IMAGE_SIZE + item.poster_path).into(holder.posterImage)
+        Picasso.with(holder.posterImage.context).load(BASE_URL + IMAGE_SIZE + item.poster_path).into(holder.posterImage)
 
         holder.title.text = item.title
         holder.overview.text = item.overview
@@ -71,5 +72,11 @@ class SimpleItemRecyclerViewAdapter(private val parentActivity: ItemListActivity
         val posterImage: ImageView = view.findViewById(R.id.poster_image)
         val title: TextView = view.findViewById(R.id.title)
         val overview: TextView = view.findViewById(R.id.overview)
+    }
+
+
+    companion object {
+        const val BASE_URL = "https://image.tmdb.org/t/p/"
+        const val IMAGE_SIZE = "w154"
     }
 }

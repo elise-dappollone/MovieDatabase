@@ -6,8 +6,13 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.edapp.moviedatabase.api.MovieApiService
+import com.edapp.moviedatabase.api.MovieRepository
 import com.edapp.moviedatabase.dummy.DummyContent
+import com.edapp.moviedatabase.models.Movie
+import com.squareup.picasso.Picasso
 
 /**
  * A fragment representing a single Item detail screen.
@@ -17,42 +22,40 @@ import com.edapp.moviedatabase.dummy.DummyContent
  */
 class ItemDetailFragment : Fragment() {
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
-    private var item: DummyContent.DummyItem? = null
+    lateinit var movie: Movie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            if (it.containsKey(ARG_ITEM_ID)) {
-                // Load the dummy content specified by the fragment
-                // arguments. In a real-world scenario, use a Loader
-                // to load content from a content provider.
-                item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
-                activity?.findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout)?.title = item?.content
+            if (it.containsKey(ITEM_DETAIL)) {
+                movie = it.get(ITEM_DETAIL) as Movie
             }
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val rootView = inflater.inflate(R.layout.item_detail, container, false)
 
-        // Show the dummy content as text in a TextView.
-        item?.let {
-            rootView.findViewById<TextView>(R.id.item_detail).text = it.details
+        activity?.findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout)?.title =
+            movie?.title
+        
+        Picasso.with(this.requireContext())
+            .load(SimpleItemRecyclerViewAdapter.BASE_URL + IMAGE_SIZE + movie.backdrop_path)
+            .into(activity?.findViewById<ImageView>(R.id.backdrop))
+
+        movie?.let {
+            rootView.findViewById<TextView>(R.id.item_detail_title).text = it.overview
         }
 
         return rootView
     }
 
     companion object {
-        /**
-         * The fragment argument representing the item ID that this fragment
-         * represents.
-         */
-        const val ARG_ITEM_ID = "item_id"
+        const val ITEM_DETAIL = "item_detail"
+        const val IMAGE_SIZE = "w500"
     }
 }

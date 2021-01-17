@@ -1,22 +1,13 @@
 package com.edapp.moviedatabase
 
-import android.R.attr
-import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
-import com.edapp.moviedatabase.dummy.DummyContent
 import com.edapp.moviedatabase.models.Movie
 import com.edapp.moviedatabase.presenters.ItemListPresenter
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.squareup.picasso.Picasso
 
 
 /**
@@ -27,6 +18,7 @@ import com.squareup.picasso.Picasso
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
+
 class ItemListActivity : AppCompatActivity() {
 
     private val presenter = ItemListPresenter()
@@ -55,10 +47,6 @@ class ItemListActivity : AppCompatActivity() {
         }
 
         if (findViewById<NestedScrollView>(R.id.item_detail_container) != null) {
-            // The detail container view will be present only in the
-            // large-screen layouts (res/values-w900dp).
-            // If this view is present, then the
-            // activity should be in two-pane mode.
             twoPane = true
         }
 
@@ -76,10 +64,5 @@ class ItemListActivity : AppCompatActivity() {
     private fun updateRecyclerView(data: Array<Movie>) {
         adapter.updateData(data)
 
-    }
-
-    companion object {
-        const val BASE_URL = "https://image.tmdb.org/t/p/"
-        const val IMAGE_SIZE = "w154"
     }
 }
