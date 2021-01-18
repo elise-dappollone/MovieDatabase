@@ -1,27 +1,21 @@
 package com.edapp.moviedatabase
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.edapp.moviedatabase.api.MovieApiService
-import com.edapp.moviedatabase.api.MovieRepository
-import com.edapp.moviedatabase.dummy.DummyContent
+import androidx.fragment.app.Fragment
 import com.edapp.moviedatabase.models.Movie
 import com.edapp.moviedatabase.models.MovieDetail
 import com.edapp.moviedatabase.presenters.ItemDetailPresenter
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.squareup.picasso.Picasso
+import java.text.NumberFormat
+import java.util.*
 
-/**
- * A fragment representing a single Item detail screen.
- * This fragment is either contained in a [ItemListActivity]
- * in two-pane mode (on tablets) or a [ItemDetailActivity]
- * on handsets.
- */
+
 class ItemDetailFragment : Fragment() {
 
     lateinit var movie: Movie
@@ -58,8 +52,12 @@ class ItemDetailFragment : Fragment() {
             rootView.findViewById<TextView>(R.id.release_detail).text = it.release_date
         }
         movieDetails.let {
-            val revenueString = String.format("%,d", it.revenue)
-            val budgetString = String.format("%,d", it.budget)
+            val numberFormat: NumberFormat = NumberFormat.getCurrencyInstance(Locale.US).apply {
+                maximumFractionDigits = 0
+            }
+            val revenueString: String = numberFormat.format(it.revenue)
+            val budgetString = numberFormat.format(it.budget)
+
             rootView.findViewById<TextView>(R.id.revenue_header).text = getString(R.string.revenue_header)
             rootView.findViewById<TextView>(R.id.revenue_detail).text = revenueString
 
@@ -67,7 +65,7 @@ class ItemDetailFragment : Fragment() {
             rootView.findViewById<TextView>(R.id.budget_detail).text = budgetString
 
             rootView.findViewById<TextView>(R.id.runtime_header).text = getString(R.string.runtime_header)
-            rootView.findViewById<TextView>(R.id.runtime_detail).text = it.runtime.toString()
+            rootView.findViewById<TextView>(R.id.runtime_detail).text = it.runtime.toString() + " minutes"
         }
 
         return rootView

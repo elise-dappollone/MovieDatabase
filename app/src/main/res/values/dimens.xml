@@ -6,4 +6,5 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="list_item_margin">8dp</dimen>
     <dimen name="detail_title_padding">16dp</dimen>
+    <dimen name="detail_column_spacing">62dp</dimen>
 </resources>
