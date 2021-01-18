@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieDatabase">
         <activity
-            android:name=".ItemListActivity"
+            android:name=".views.ItemListActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.MovieDatabase.NoActionBar">
             <intent-filter>
@@ -22,13 +22,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ItemDetailActivity"
+            android:name=".views.ItemDetailActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName=".ItemListActivity"
+            android:parentActivityName=".views.ItemListActivity"
             android:theme="@style/Theme.MovieDatabase.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.edapp.moviedatabase.ItemListActivity" />
+                android:value="com.edapp.moviedatabase.views.ItemListActivity" />
         </activity>
     </application>
 

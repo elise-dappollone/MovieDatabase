@@ -1,18 +1,12 @@
-package com.edapp.moviedatabase
+package com.edapp.moviedatabase.views
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.edapp.moviedatabase.ItemDetailFragment.Companion.ITEM_DETAIL
+import com.edapp.moviedatabase.views.ItemDetailFragment.Companion.ITEM_DETAIL
+import com.edapp.moviedatabase.R
 import com.edapp.moviedatabase.models.Movie
-
-/**
- * An activity representing a single Item detail screen. This
- * activity is only used on narrow width devices. On tablet-size devices,
- * item details are presented side-by-side with a list of items
- * in a [ItemListActivity].
- */
 
 class ItemDetailActivity : AppCompatActivity() {
 

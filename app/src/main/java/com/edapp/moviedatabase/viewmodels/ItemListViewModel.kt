@@ -1,4 +1,4 @@
-package com.edapp.moviedatabase.ViewModels
+package com.edapp.moviedatabase.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -8,7 +8,7 @@ import com.edapp.moviedatabase.models.Movie
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class ItemListViewModel: ViewModel(){
+class ItemListViewModel : ViewModel() {
     private val job = Job()
     private val coroutineContext: CoroutineContext = job + Dispatchers.Default
     private val scope = CoroutineScope(coroutineContext)
@@ -21,7 +21,7 @@ class ItemListViewModel: ViewModel(){
             getPopularMoviesList(pageNumber)
         }
         runBlocking {
-            movieList = response.await()?.toTypedArray()
+            movieList = response.await().toTypedArray()
         }
     }
 
@@ -31,20 +31,19 @@ class ItemListViewModel: ViewModel(){
             getPopularMoviesList(pageNumber)
         }
         runBlocking {
-            movieList = response.await()?.toTypedArray()
+            movieList = response.await().toTypedArray()
         }
     }
 
-    suspend fun getPopularMoviesList(page: Int): List<Movie> {
+    private suspend fun getPopularMoviesList(page: Int): List<Movie> {
         return repository.getPopularMoviesList(page) ?: emptyList()
     }
 }
 
-class ItemListViewModelFactory() : ViewModelProvider.Factory {
+@Suppress("UNCHECKED_CAST")
+class ItemListViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ItemListViewModel::class.java)) {
-            return ItemListViewModel() as T
-        }
+        if (modelClass.isAssignableFrom(ItemListViewModel::class.java)) return ItemListViewModel() as T
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

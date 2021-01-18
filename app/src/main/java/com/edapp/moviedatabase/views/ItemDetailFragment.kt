@@ -1,4 +1,4 @@
-package com.edapp.moviedatabase
+package com.edapp.moviedatabase.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,22 +8,22 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.edapp.moviedatabase.R
+import com.edapp.moviedatabase.SimpleItemRecyclerViewAdapter
 import com.edapp.moviedatabase.models.Movie
 import com.edapp.moviedatabase.models.MovieDetail
-import com.edapp.moviedatabase.ViewModels.ItemDetailViewModel
-import com.edapp.moviedatabase.ViewModels.ItemDetailViewModelFactory
-import com.edapp.moviedatabase.ViewModels.ItemListViewModel
+import com.edapp.moviedatabase.viewmodels.ItemDetailViewModel
+import com.edapp.moviedatabase.viewmodels.ItemDetailViewModelFactory
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
 
-
 class ItemDetailFragment : Fragment() {
 
     lateinit var movie: Movie
-    lateinit var viewModel: ItemDetailViewModel
-    lateinit var viewModelFactory: ItemDetailViewModelFactory
+    private lateinit var viewModel: ItemDetailViewModel
+    private lateinit var viewModelFactory: ItemDetailViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,28 +60,37 @@ class ItemDetailFragment : Fragment() {
 
         movie.let {
             rootView.findViewById<TextView>(R.id.overview).text = it.overview
-            rootView.findViewById<TextView>(R.id.release_header).text = getString(R.string.release_date_header)
+            rootView.findViewById<TextView>(R.id.release_header).text = getString(
+                R.string.release_date_header
+            )
             rootView.findViewById<TextView>(R.id.release_detail).text = it.release_date
         }
 
         return rootView
     }
 
-    fun setUpMoVieDetailUi(view: View, movieDetail: MovieDetail) {
+    private fun setUpMoVieDetailUi(view: View, movieDetail: MovieDetail) {
         val numberFormat: NumberFormat = NumberFormat.getCurrencyInstance(Locale.US).apply {
             maximumFractionDigits = 0
         }
         val revenueString: String = numberFormat.format(movieDetail.revenue)
         val budgetString = numberFormat.format(movieDetail.budget)
+        val runtimeString = movieDetail.runtime.toString() + "minutes"
 
-        view.findViewById<TextView>(R.id.revenue_header).text = getString(R.string.revenue_header)
+        view.findViewById<TextView>(R.id.revenue_header).text = getString(
+            R.string.revenue_header
+        )
         view.findViewById<TextView>(R.id.revenue_detail).text = revenueString
 
-        view.findViewById<TextView>(R.id.budget_header).text = getString(R.string.budget_header)
+        view.findViewById<TextView>(R.id.budget_header).text = getString(
+            R.string.budget_header
+        )
         view.findViewById<TextView>(R.id.budget_detail).text = budgetString
 
-        view.findViewById<TextView>(R.id.runtime_header).text = getString(R.string.runtime_header)
-        view.findViewById<TextView>(R.id.runtime_detail).text = movieDetail.runtime.toString() + " minutes"
+        view.findViewById<TextView>(R.id.runtime_header).text = getString(
+            R.string.runtime_header
+        )
+        view.findViewById<TextView>(R.id.runtime_detail).text = runtimeString
     }
 
     companion object {

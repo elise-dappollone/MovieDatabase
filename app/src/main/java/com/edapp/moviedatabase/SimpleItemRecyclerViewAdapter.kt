@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.edapp.moviedatabase.ItemDetailFragment.Companion.ITEM_DETAIL
-import com.edapp.moviedatabase.ItemDetailFragment.Companion.ITEM_ID
+import com.edapp.moviedatabase.views.ItemDetailFragment.Companion.ITEM_DETAIL
+import com.edapp.moviedatabase.views.ItemDetailFragment.Companion.ITEM_ID
 import com.edapp.moviedatabase.models.Movie
+import com.edapp.moviedatabase.views.ItemDetailActivity
+import com.edapp.moviedatabase.views.ItemDetailFragment
+import com.edapp.moviedatabase.views.ItemListActivity
 import com.squareup.picasso.Picasso
 
 class SimpleItemRecyclerViewAdapter(
@@ -26,7 +29,8 @@ class SimpleItemRecyclerViewAdapter(
         onClickListener = View.OnClickListener { v ->
             val item = v.tag as Movie
             if (twoPane) {
-                val fragment = ItemDetailFragment().apply {
+                val fragment = ItemDetailFragment()
+                    .apply {
                     arguments = Bundle().apply {
                         putSerializable(ITEM_DETAIL, item)
                         putString(ITEM_ID, item.id)

@@ -10,7 +10,7 @@ open class Repository {
         var output : T? = null
         when (result) {
             is Result.Success -> output = result.output
-            is Result.Error -> Log.e("Movie Repository", "$error")
+            is Result.Error -> Log.e("Movie Repository", error)
         }
         return output
     }

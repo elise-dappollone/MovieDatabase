@@ -15,7 +15,7 @@
         android:padding="12dp"
         android:textIsSelectable="true"
         app:layout_constraintStart_toStartOf="parent"
-        tools:context=".ItemDetailFragment" />
+        tools:context=".views.ItemDetailFragment" />
 
     <TextView
         android:id="@+id/revenue_header"

@@ -1,4 +1,4 @@
-package com.edapp.moviedatabase.ViewModels
+package com.edapp.moviedatabase.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -18,7 +18,7 @@ class ItemDetailViewModel: ViewModel() {
 
     var movieDetail = MutableLiveData<MovieDetail>()
 
-    private val emptyMovieDetail = MovieDetail("", 0, 0, emptyArray(), 0)
+    private val emptyMovieDetail = MovieDetail("", 0, 0, 0)
 
     fun onCreate(movieId: Int) {
         val response = scope.async {
@@ -37,11 +37,10 @@ class ItemDetailViewModel: ViewModel() {
     }
 }
 
+@Suppress("UNCHECKED_CAST")
 class ItemDetailViewModelFactory() : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ItemDetailViewModel::class.java)) {
-            return ItemDetailViewModel() as T
-        }
+        if (modelClass.isAssignableFrom(ItemDetailViewModel::class.java)) return ItemDetailViewModel() as T
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
