@@ -1,13 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
 <TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/overview"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_detail_title"
     style="?android:attr/textAppearanceLarge"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_constraintStart_toStartOf="parent"
     android:padding="16dp"
     android:textIsSelectable="true"
     tools:context=".ItemDetailFragment" />
+
+    <TextView
+        android:id="@+id/revenue_header"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/overview"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="@dimen/detail_title_padding"/>
+
+    <TextView
+        android:id="@+id/revenue_detail"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/revenue_header"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingLeft="@dimen/detail_title_padding"/>
+
+    <TextView
+        android:id="@+id/budget_header"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/overview"
+        app:layout_constraintStart_toEndOf="@id/revenue_detail"
+        android:padding="@dimen/detail_title_padding"/>
+
+    <TextView
+        android:id="@+id/budget_detail"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/budget_header"
+        app:layout_constraintStart_toEndOf="@id/revenue_detail"
+        android:paddingLeft="@dimen/detail_title_padding"/>
+
+    <TextView
+        android:id="@+id/release_header"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/overview"
+        app:layout_constraintStart_toEndOf="@id/budget_detail"
+        android:padding="@dimen/detail_title_padding"/>
+
+    <TextView
+        android:id="@+id/release_detail"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/release_header"
+        app:layout_constraintStart_toEndOf="@id/budget_detail"
+        android:paddingLeft="@dimen/detail_title_padding"/>
+
+    <TextView
+        android:id="@+id/runtime_header"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/overview"
+        app:layout_constraintStart_toEndOf="@id/release_detail"
+        android:padding="@dimen/detail_title_padding"/>
+
+    <TextView
+        android:id="@+id/runtime_detail"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/runtime_header"
+        app:layout_constraintStart_toEndOf="@id/release_detail"
+        android:paddingLeft="@dimen/detail_title_padding"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

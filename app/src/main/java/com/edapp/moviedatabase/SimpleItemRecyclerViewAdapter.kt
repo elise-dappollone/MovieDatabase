@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edapp.moviedatabase.ItemDetailFragment.Companion.ITEM_DETAIL
-import com.edapp.moviedatabase.dummy.DummyContent
+import com.edapp.moviedatabase.ItemDetailFragment.Companion.ITEM_ID
 import com.edapp.moviedatabase.models.Movie
 import com.squareup.picasso.Picasso
 
@@ -27,6 +27,7 @@ class SimpleItemRecyclerViewAdapter(private val parentActivity: ItemListActivity
                 val fragment = ItemDetailFragment().apply {
                     arguments = Bundle().apply {
                         putSerializable(ITEM_DETAIL, item)
+                        putString(ITEM_ID, item.id)
                     }
                 }
                 parentActivity.supportFragmentManager
@@ -36,6 +37,7 @@ class SimpleItemRecyclerViewAdapter(private val parentActivity: ItemListActivity
             } else {
                 val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
                     putExtra(ITEM_DETAIL, item)
+                    putExtra(ITEM_ID, item.id)
                 }
                 v.context.startActivity(intent)
             }

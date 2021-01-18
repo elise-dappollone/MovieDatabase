@@ -3,6 +3,7 @@ package com.edapp.moviedatabase.api
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -16,7 +17,15 @@ object MovieApiService {
         chain.proceed(request)
     }
 
-    private val okHttpClient = OkHttpClient().newBuilder().addInterceptor(interceptor).build()
+    private val loggingInterceptor = run {
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.apply {
+            httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        }
+    }
+
+    private val okHttpClient = OkHttpClient().newBuilder().addInterceptor(interceptor).addInterceptor(
+        loggingInterceptor).build()
 
     val retrofit: Retrofit
         get() = Retrofit.Builder().client(okHttpClient)

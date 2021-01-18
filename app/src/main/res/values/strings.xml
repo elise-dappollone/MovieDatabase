@@ -2,4 +2,8 @@
     <string name="app_name">Movie Database</string>
     <string name="title_item_detail">Item Detail</string>
     <string name="load_more">Load More</string>
+    <string name="revenue_header">Revenue</string>
+    <string name="budget_header">Budget</string>
+    <string name="release_date_header">Release Date</string>
+    <string name="runtime_header">Runtime</string>
 </resources>
