@@ -7,8 +7,8 @@ import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.edapp.moviedatabase.presenters.ItemListViewModel
-import com.edapp.moviedatabase.presenters.ItemListViewModelFactory
+import com.edapp.moviedatabase.ViewModels.ItemListViewModel
+import com.edapp.moviedatabase.ViewModels.ItemListViewModelFactory
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 

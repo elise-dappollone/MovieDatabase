@@ -1,30 +1,32 @@
-package com.edapp.moviedatabase.presenters
+package com.edapp.moviedatabase.ViewModels
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.edapp.moviedatabase.api.MovieApiService
 import com.edapp.moviedatabase.api.MovieRepository
 import com.edapp.moviedatabase.models.MovieDetail
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class ItemDetailPresenter {
+class ItemDetailViewModel: ViewModel() {
     private val job = Job()
     private val coroutineContext: CoroutineContext = job + Dispatchers.Default
     private val scope = CoroutineScope(coroutineContext)
     private val repository = MovieRepository(MovieApiService.movieApi)
 
-    private lateinit var movieDetail: MovieDetail
+    var movieDetail = MutableLiveData<MovieDetail>()
 
     private val emptyMovieDetail = MovieDetail("", 0, 0, emptyArray(), 0)
 
-    fun onCreate(movieId: Int): MovieDetail {
+    fun onCreate(movieId: Int) {
         val response = scope.async {
             getMovieDetails(movieId)
         }
         runBlocking {
-            movieDetail = response.await()
+            movieDetail.postValue(response.await())
         }
-        return movieDetail
     }
 
     private suspend fun getMovieDetails(movieId: Int): MovieDetail {
@@ -32,5 +34,14 @@ class ItemDetailPresenter {
         Log.i("ItemDetailPresenter", result.toString())
 
         return result
+    }
+}
+
+class ItemDetailViewModelFactory() : ViewModelProvider.Factory {
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(ItemDetailViewModel::class.java)) {
+            return ItemDetailViewModel() as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

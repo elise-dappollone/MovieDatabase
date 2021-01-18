@@ -9,14 +9,13 @@
 
     <TextView xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/overview"
-        style="?android:attr/textAppearanceLarge"
+        style="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
+        android:padding="12dp"
         android:textIsSelectable="true"
         app:layout_constraintStart_toStartOf="parent"
-        tools:context=".ItemDetailFragment"
-        android:text="Joe Gardner is a middle school teacher with a love for jazz music. After a successful gig at the Half Note Club, he suddenly gets into an accident that separates his soul from his body and is transported to the You Seminar, a center in which souls develop and gain passions before being transported to a newborn child. Joe must enlist help from the other souls-in-training, like 22, a soul who has spent eons in the You Seminar, in order"/>
+        tools:context=".ItemDetailFragment" />
 
     <TextView
         android:id="@+id/revenue_header"
@@ -25,14 +24,12 @@
         style="@style/DetailItemTitle"
         android:layout_margin="@dimen/detail_title_padding"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/overview"
-        android:text="Revenue"/>
+        app:layout_constraintTop_toBottomOf="@id/overview" />
 
     <TextView
         android:id="@+id/revenue_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="$1,000,000"
         app:layout_constraintStart_toStartOf="@+id/revenue_header"
         app:layout_constraintTop_toBottomOf="@id/revenue_header" />
 
@@ -42,7 +39,6 @@
         android:layout_height="wrap_content"
         style="@style/DetailItemTitle"
         android:layout_marginLeft="@dimen/detail_column_spacing"
-        android:text="Budget"
         app:layout_constraintBottom_toTopOf="@+id/revenue_detail"
         app:layout_constraintStart_toEndOf="@+id/revenue_header"
         app:layout_constraintTop_toTopOf="@+id/revenue_header" />
@@ -51,7 +47,6 @@
         android:id="@+id/budget_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="$1,000,000"
         app:layout_constraintStart_toStartOf="@+id/budget_header"
         app:layout_constraintTop_toBottomOf="@+id/budget_header" />
 
@@ -62,7 +57,6 @@
         style="@style/DetailItemTitle"
         android:layout_marginTop="@dimen/detail_title_padding"
         android:layout_marginLeft="@dimen/detail_title_padding"
-        android:text="Runtime"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/revenue_detail" />
 
@@ -70,7 +64,6 @@
         android:id="@+id/runtime_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="100 min"
         app:layout_constraintStart_toStartOf="@+id/runtime_header"
         app:layout_constraintTop_toBottomOf="@+id/runtime_header" />
 
@@ -81,7 +74,6 @@
         style="@style/DetailItemTitle"
         android:layout_marginTop="@dimen/detail_title_padding"
         android:layout_marginLeft="@dimen/detail_column_spacing"
-        android:text="Release Date"
         app:layout_constraintStart_toEndOf="@+id/runtime_header"
         app:layout_constraintTop_toBottomOf="@+id/revenue_detail" />
 
@@ -89,7 +81,6 @@
         android:id="@+id/release_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="18-1-21"
         app:layout_constraintStart_toStartOf="@+id/release_header"
         app:layout_constraintTop_toBottomOf="@id/release_header" />
 

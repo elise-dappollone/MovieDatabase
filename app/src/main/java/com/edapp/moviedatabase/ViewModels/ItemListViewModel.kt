@@ -1,4 +1,4 @@
-package com.edapp.moviedatabase.presenters
+package com.edapp.moviedatabase.ViewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
