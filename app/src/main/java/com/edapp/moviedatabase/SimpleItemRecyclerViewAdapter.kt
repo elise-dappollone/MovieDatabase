@@ -13,9 +13,11 @@ import com.edapp.moviedatabase.ItemDetailFragment.Companion.ITEM_ID
 import com.edapp.moviedatabase.models.Movie
 import com.squareup.picasso.Picasso
 
-class SimpleItemRecyclerViewAdapter(private val parentActivity: ItemListActivity,
-                                    private var values: Array<Movie>,
-                                    private val twoPane: Boolean) :
+class SimpleItemRecyclerViewAdapter(
+    private val parentActivity: ItemListActivity,
+    private var values: Array<Movie>,
+    private val twoPane: Boolean
+) :
     RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
@@ -52,7 +54,8 @@ class SimpleItemRecyclerViewAdapter(private val parentActivity: ItemListActivity
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        Picasso.with(holder.posterImage.context).load(BASE_URL + IMAGE_SIZE + item.poster_path).into(holder.posterImage)
+        Picasso.with(holder.posterImage.context).load(BASE_URL + IMAGE_SIZE + item.poster_path)
+            .into(holder.posterImage)
 
         holder.title.text = item.title
         holder.overview.text = item.overview
@@ -66,7 +69,14 @@ class SimpleItemRecyclerViewAdapter(private val parentActivity: ItemListActivity
     override fun getItemCount() = values.size
 
     fun updateData(data: Array<Movie>) {
-        values = data
+        val oldList: MutableList<Movie> = values.toMutableList()
+        val newList: MutableList<Movie> = data.toMutableList()
+
+        for (item in newList) {
+            oldList.add(item)
+        }
+        values = oldList.toTypedArray()
+
         notifyDataSetChanged()
     }
 
