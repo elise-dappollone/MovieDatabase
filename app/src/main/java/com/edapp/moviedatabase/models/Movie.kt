@@ -9,10 +9,7 @@ data class Movie(
     val overview: String,
     val poster_path: String,
     val backdrop_path: String,
-    val release_date: String,
-    val revenue: Int,
-    val budget: Int,
-    val runtime: Int) : Serializable
+    val release_date: String) : Serializable
 
 
 

@@ -8,13 +8,14 @@ import com.edapp.moviedatabase.models.Movie
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class ItemListViewModel : ViewModel() {
+class ItemListViewModel(dispatcher: CoroutineDispatcher) : ViewModel() {
     private val job = Job()
-    private val coroutineContext: CoroutineContext = job + Dispatchers.Default
+    private val coroutineContext: CoroutineContext = job + dispatcher
     private val scope = CoroutineScope(coroutineContext)
-    private val repository = MovieRepository(MovieApiService.movieApi)
-    var movieList: Array<Movie> = emptyArray()
     private var pageNumber = 1
+
+    var repository = MovieRepository(MovieApiService.movieApi)
+    var movieList: Array<Movie> = emptyArray()
 
     fun onCreate() {
         val response = scope.async {
@@ -41,9 +42,9 @@ class ItemListViewModel : ViewModel() {
 }
 
 @Suppress("UNCHECKED_CAST")
-class ItemListViewModelFactory : ViewModelProvider.Factory {
+class ItemListViewModelFactory(private val dispatcher: CoroutineDispatcher) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ItemListViewModel::class.java)) return ItemListViewModel() as T
+        if (modelClass.isAssignableFrom(ItemListViewModel::class.java)) return ItemListViewModel(dispatcher) as T
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

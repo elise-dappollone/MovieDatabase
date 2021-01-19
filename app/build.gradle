@@ -4,6 +4,11 @@ plugins {
 }
 
 android {
+    packagingOptions {
+        exclude("META-INF/AL2.0")
+        exclude("META-INF/LGPL2.1")
+    }
+
     compileSdkVersion 30
     buildToolsVersion "30.0.0"
 
@@ -58,4 +63,11 @@ dependencies {
 
     //Picasso dependencies
     implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    //test dependencies
+    implementation "org.mockito:mockito-core:${mockitoVersion}"
+    implementation "org.mockito:mockito-inline:${mockitoVersion}"
+    implementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoKotlinVersion}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutinesVersion}"
+    implementation "androidx.arch.core:core-testing:${archCoreVersion}"
 }

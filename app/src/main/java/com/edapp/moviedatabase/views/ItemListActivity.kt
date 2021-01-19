@@ -12,6 +12,7 @@ import com.edapp.moviedatabase.SimpleItemRecyclerViewAdapter
 import com.edapp.moviedatabase.viewmodels.ItemListViewModel
 import com.edapp.moviedatabase.viewmodels.ItemListViewModelFactory
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import kotlinx.coroutines.Dispatchers
 
 
 class ItemListActivity : AppCompatActivity() {
@@ -28,7 +29,7 @@ class ItemListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
 
-        viewModelFactory = ItemListViewModelFactory()
+        viewModelFactory = ItemListViewModelFactory(Dispatchers.Default)
 
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ItemListViewModel::class.java)

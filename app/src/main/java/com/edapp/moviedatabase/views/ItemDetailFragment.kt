@@ -16,6 +16,7 @@ import com.edapp.moviedatabase.viewmodels.ItemDetailViewModel
 import com.edapp.moviedatabase.viewmodels.ItemDetailViewModelFactory
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.Dispatchers
 import java.text.NumberFormat
 import java.util.*
 
@@ -41,7 +42,7 @@ class ItemDetailFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.item_detail, container, false)
 
-        viewModelFactory = ItemDetailViewModelFactory()
+        viewModelFactory = ItemDetailViewModelFactory(Dispatchers.Default)
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ItemDetailViewModel::class.java)
 
@@ -75,7 +76,7 @@ class ItemDetailFragment : Fragment() {
         }
         val revenueString: String = numberFormat.format(movieDetail.revenue)
         val budgetString = numberFormat.format(movieDetail.budget)
-        val runtimeString = movieDetail.runtime.toString() + "minutes"
+        val runtimeString = movieDetail.runtime.toString() + " minutes"
 
         view.findViewById<TextView>(R.id.revenue_header).text = getString(
             R.string.revenue_header
