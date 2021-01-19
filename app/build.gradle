@@ -64,10 +64,12 @@ dependencies {
     //Picasso dependencies
     implementation "com.squareup.picasso:picasso:$picassoVersion"
 
-    //test dependencies
+    //Mockito dependencies
     implementation "org.mockito:mockito-core:${mockitoVersion}"
     implementation "org.mockito:mockito-inline:${mockitoVersion}"
     implementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoKotlinVersion}"
+
+    //other test dependencies
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutinesVersion}"
     implementation "androidx.arch.core:core-testing:${archCoreVersion}"
 }
